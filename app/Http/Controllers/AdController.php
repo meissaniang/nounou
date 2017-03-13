@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Ad;
+use App\Nanny;
 use Illuminate\Http\Request;
 
 class AdController extends Controller
@@ -32,9 +34,14 @@ class AdController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Nanny $nanny,Request $request)
     {
-        //
+        $ad=$request->all();
+        $ad['nanny_id']=$nanny->id;
+        $ad=Ad::create($ad);
+        dd($ad);
+        dd($nanny->id);
+
     }
 
     /**

@@ -40,10 +40,10 @@ class NannyController extends Controller
         $user_id=Sentinel::getUser()->id;
         $inputs = $request->all();
         $inputs['user_id']=$user_id;
-        $nounou = Nanny::create($inputs);
-        if ($nounou){
+        $nanny = Nanny::create($inputs);
+        if ($nanny){
             return response()->json([
-                'nounou'=>$nounou
+                'nounou'=>$nanny
             ]);
         }else{
             return redirect(404);
@@ -81,11 +81,11 @@ class NannyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $nounou = Nanny::find($id);
-        $nounou->update($request->all());
-        if (sizeof($nounou)) {
+        $nanny = Nanny::find($id);
+        $nanny->update($request->all());
+        if (sizeof($nanny)) {
             return response()->json([
-                'nounou' => $nounou
+                'nanny' => $nanny
             ], 200);
         } else {
             return redirect(404);
@@ -102,9 +102,9 @@ class NannyController extends Controller
      */
     public function destroy($id)
     {
-        $nounou = Nanny::find($id);
-        if ($nounou) {
-            $nounou->delete();
+        $nanny = Nanny::find($id);
+        if ($nanny) {
+            $nanny->delete();
 
         }
     }

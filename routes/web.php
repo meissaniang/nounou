@@ -19,6 +19,7 @@ Route::group(['middleware' => 'admin'], function () {
 });
 Route::group(['middleware' => 'nanny'], function () {
     Route::resource('nanny','NannyController');
+    Route::resource('nanny.ad','AdController');
 });
 Route::group(['middleware' => 'parent'], function () {
     Route::resource('parent','ParentAppController');
