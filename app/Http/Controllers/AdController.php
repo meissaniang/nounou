@@ -39,9 +39,15 @@ class AdController extends Controller
         $ad=$request->all();
         $ad['nanny_id']=$nanny->id;
         $ad=Ad::create($ad);
-        dd($ad);
-        dd($nanny->id);
-
+        if(sizeof($ad)){
+            return response()->json([
+                'ad'=>$ad
+            ]);
+        }else{
+            return response()->json([
+                'error'=>'ad not saved'
+            ]);
+        }
     }
 
     /**
@@ -75,7 +81,7 @@ class AdController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

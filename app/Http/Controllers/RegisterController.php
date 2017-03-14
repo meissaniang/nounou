@@ -17,6 +17,7 @@ class RegisterController extends Controller
 
     public function post(Request $request)
     {
+        dd($request);
         $user = Sentinel::registerAndActivate($request->all());
         $role=Sentinel::findRoleBySlug($request['role']);
         $role->users()->attach($user);
