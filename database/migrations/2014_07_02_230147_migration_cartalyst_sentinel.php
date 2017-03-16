@@ -47,9 +47,12 @@ class MigrationCartalystSentinel extends Migration
             $table->string('nationality');
             $table->string('photo')->nullable();
             $table->boolean('actif')->nullable();
-            $table->timestamps();
+            $table->unique('email')->nullable();
+            $table->string('account_type')->default('normal');
+            $table->string('sns_ac_id')->nullable();
+            $table->rememberToken();
             $table->engine = 'InnoDB';
-            $table->unique('email');
+            $table->timestamps();
         });
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');

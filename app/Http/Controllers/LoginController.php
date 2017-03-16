@@ -48,7 +48,7 @@ class LoginController extends Controller
         if (Sentinel::check() && Sentinel::getUser()->roles()->first()->slug == 'admin') {
             return redirect()->route('admin.index');
         } elseif (Sentinel::check() && Sentinel::getUser()->roles()->first()->slug == 'nanny') {
-            return redirect()->route('nanny.index');
+            return redirect()->route('nanny.show',Sentinel::getUser()->id);
         } elseif (Sentinel::check() && Sentinel::getUser()->roles()->first()->slug == 'parent') {
             return redirect()->route('parent.index');
 

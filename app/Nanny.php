@@ -15,4 +15,7 @@ class Nanny extends Model
     public function ads(){
         return $this->hasMany('App\Ad');
     }
+    public function plannings(){
+        return $this->hasMany('App\Planning');
+    }
 }

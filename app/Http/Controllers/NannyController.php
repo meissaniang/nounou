@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Nanny;
+use Cartalyst\Sentinel\Users\EloquentUser;
 use Illuminate\Http\Request;
 use Sentinel;
 use Session;
@@ -16,7 +17,17 @@ class NannyController extends Controller
      */
     public function index()
     {
-        return $user_id=Sentinel::getUser()->first_name;
+        $nanny = Nanny::paginate(5);
+        if (sizeof($nanny)) {
+            return response()->json([
+                'nanny'=>$nanny
+            ]);
+        }else{
+            return response()->json([
+                'nanny'=>'no data'
+            ]);
+        }
+
     }
 
     /**
@@ -29,23 +40,25 @@ class NannyController extends Controller
         //
     }
 
+
+    
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $user_id=Sentinel::getUser()->id;
+        $user_id = Sentinel::getUser()->id;
         $inputs = $request->all();
-        $inputs['user_id']=$user_id;
+        $inputs['user_id'] = $user_id;
         $nanny = Nanny::create($inputs);
-        if ($nanny){
+        if ($nanny) {
             return response()->json([
-                'nounou'=>$nanny
+                'nounou' => $nanny
             ]);
-        }else{
+        } else {
             return redirect(404);
         }
     }
@@ -53,18 +66,29 @@ class NannyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $user=EloquentUser::find($id);
+        dd($user->toarray());
+        $nany = Nanny::find($id);
+        if ($nany){
+            return response()->json([
+                'nanny'=>$nany
+            ]);
+        }else{
+            return response()->json([
+                'error'=>'no data'
+            ]);
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -75,8 +99,8 @@ class NannyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -97,7 +121,7 @@ class NannyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

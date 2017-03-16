@@ -15,20 +15,20 @@ class RegisterController extends Controller
 
     }
 
-    public function post(Request $request)
+    public function post(UserRequest $request)
     {
-        dd($request);
+        //dd($request->toArray());
         $user = Sentinel::registerAndActivate($request->all());
         $role=Sentinel::findRoleBySlug($request['role']);
         $role->users()->attach($user);
-        if (sizeof($user)) {
+        if (sizeof($user)&& sizeof($role)) {
             return response()->json([
                 'user' => $user
             ], 200);
         } else {
-            return  redirect(404);
-
-
+            return  response()->json([
+                'error'=>'error'
+            ]);
         }
     }
     
