@@ -9,15 +9,8 @@
         "laravel/framework": "5.3.*",
         "laravelcollective/html": "5.*",
         "cartalyst/sentinel": "2.0.*",
-        "laravel/socialite": "*",
-        "cartalyst/sentinel-social": "3.*"
+        "laravel/socialite": "*"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.cartalyst.com"
-        }
-    ],
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
